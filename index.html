@@ -6,17 +6,17 @@
     <title>Redirecting...</title>
     <script>
         async function redirect() {
-            const key = window.location.pathname.substring(1); // Remove leading "/"
+            const key = window.location.pathname.substring(1); // Get short URL key
             if (!key) return;
 
             try {
-                const response = await fetch('/short-links.json');
+                const response = await fetch('short-links.json'); // Fetch short links
                 const links = await response.json();
 
                 if (links[key]) {
                     window.location.href = links[key];
                 } else {
-                    document.body.innerHTML = "<h1>Short URL Not Found</h1>";
+                    document.body.innerHTML = "<h1>404 - Short URL Not Found</h1>";
                 }
             } catch (error) {
                 document.body.innerHTML = "<h1>Error loading short links</h1>";
