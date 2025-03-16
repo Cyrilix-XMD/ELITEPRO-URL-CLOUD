@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting..</title>
+    <title>Redirecting...</title>
     <script>
         async function redirect() {
-            const path = window.location.pathname.substring(1); // Get short code from URL
-            const response = await fetch("https://raw.githubusercontent.com/Cyrilix-XMD/ELITEPRO-URL-CLOUD/main/redirects.json?timestamp=" + Date.now());
-            const redirects = await response.json();
+            const key = window.location.pathname.substring(1); // Remove leading "/"
+            if (!key) return;
 
-            if (redirects[path]) {
-                window.location.href = redirects[path]; // Redirect to full URL
-            } else {
-                document.body.innerHTML = "<h2>Invalid Short Link</h2>";
+            try {
+                const response = await fetch('/short-links.json');
+                const links = await response.json();
+
+                if (links[key]) {
+                    window.location.href = links[key];
+                } else {
+                    document.body.innerHTML = "<h1>Short URL Not Found</h1>";
+                }
+            } catch (error) {
+                document.body.innerHTML = "<h1>Error loading short links</h1>";
             }
         }
         redirect();
     </script>
 </head>
 <body>
-    <h3>Redirecting...</h3>
+    <h2>Redirecting...</h2>
 </body>
 </html>
