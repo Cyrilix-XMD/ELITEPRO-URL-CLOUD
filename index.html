@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        async function redirect() {
+            const path = window.location.pathname.substring(1); // Get short code from URL
+            const response = await fetch("redirects.json");
+            const redirects = await response.json();
+
+            if (redirects[path]) {
+                window.location.href = redirects[path]; // Redirect to full URL
+            } else {
+                document.body.innerHTML = "<h2>Invalid Short Link</h2>";
+            }
+        }
+        redirect();
+    </script>
+</head>
+<body>
+    <h3>Redirecting...</h3>
+</body>
+</html>
