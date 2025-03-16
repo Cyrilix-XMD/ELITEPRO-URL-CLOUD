@@ -7,7 +7,7 @@
     <script>
         async function redirect() {
             const path = window.location.pathname.substring(1); // Get short code from URL
-            const response = await fetch("https://raw.githubusercontent.com/Cyrilix-XMD/ELITEPRO-URL-CLOUD/main/redirects.json");
+            const response = await fetch("https://raw.githubusercontent.com/Cyrilix-XMD/ELITEPRO-URL-CLOUD/main/redirects.json?timestamp=" + Date.now());
             const redirects = await response.json();
 
             if (redirects[path]) {
